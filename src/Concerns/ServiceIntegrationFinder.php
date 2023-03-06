@@ -13,7 +13,7 @@ trait ServiceIntegrationFinder
      * 
      * @return \Illuminate\Database\Query\Builder|null
      */
-    protected function getServiceIntegrationQuery($serviceIntegrationId = null)
+    protected function getServiceIntegrationQueryFinder($serviceIntegrationId = null, $resolverMethods = [])
     {
         $serviceIntegrationModel     = config(ServiceProvider::PACKAGE_NAME.'.model');
         $serviceIntegrationTableName = $serviceIntegrationModel::TABLE_NAME;
@@ -29,8 +29,22 @@ trait ServiceIntegrationFinder
             $query = $query->where('id', $this->getMainServiceIntegrationId());
         }else if (method_exists($this, 'getMainServiceIntegrationOwnerId') && method_exists($this,'getMainServiceIntegrationOwnerType')){
             $query = $query->where('owner_type', $this->getMainServiceIntegrationOwnerType())->where('owner_id', $this->getMainServiceIntegrationOwnerId());
+        }else if(is_array($resolverMethods) && $resolverMethods != []){
+            if (method_exists($this, $resolverMethods[0]) && method_exists($this, $resolverMethods[1])) {
+                $query = $query
+                            ->where('owner_id', $this->{$resolverMethods[0]}())
+                            ->where('owner_type', $this->{$resolverMethods[1]}());
+            }else{
+                $query = $query->where('owner_type', 'not-exists-expecting-null');
+            }
+        }else if(is_string($resolverMethods) && $resolverMethods){
+            if (method_exists($this, $resolverMethods)) {
+                $query = $query->where('id', $this->{$resolverMethods}())
+            }else{
+                $query = $query->where('id', 'not-exists-expecting-null');
+            }
         }else{
-            $query = $query->where('owner_type', 'not-exists-expecting-null');
+            $query = $query->where('id', 'not-exists-expecting-null');
         }
 
         return $query;
