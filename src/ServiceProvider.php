@@ -33,6 +33,11 @@ class ServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/'.self::PACKAGE_NAME.'.php', self::PACKAGE_NAME);
     }
 
+    public static function getFromConfig($keys, $default = null)
+    {
+        return config(self::PACKAGE_NAME.'.'.$keys, $default);
+    }
+
     protected function registerPublishables()
     {
         $this->publishes([
