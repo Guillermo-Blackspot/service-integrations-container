@@ -1,0 +1,26 @@
+{
+    "name": "blackspot/service-integrations-container",
+    "description": "The service integrations container base for stripe multiple accounts and system_charges",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "BlackSpot\\ServiceIntegrationsContainer\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Guillermo-Rodriguez",
+            "email": "guillermo.blackspot@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "BlackSpot\\ServiceIntegrationsContainer\\ServicePro"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {}
+}
