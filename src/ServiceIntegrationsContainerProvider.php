@@ -4,7 +4,7 @@ namespace BlackSpot\ServiceIntegrationsContainer;
 
 use Illuminate\Support\ServiceProvider;
 
-class ServiceProvider extends ServiceProvider
+class ServiceIntegrationsContainerProvider extends ServiceProvider
 {
     public const PACKAGE_NAME = 'service-integrations-container';
 

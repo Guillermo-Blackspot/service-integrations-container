@@ -2,7 +2,8 @@
 
 namespace BlackSpot\ServiceIntegrationsContainer\Concerns;
 
-use BlackSpot\ServiceIntegrationsContainer\ServiceProvider;
+use BlackSpot\ServiceIntegrationsContainer\Models\ServiceIntegration;
+use BlackSpot\ServiceIntegrationsContainer\ServiceIntegrationsContainerProvider;
 
 trait ServiceIntegrationFinder
 {   
@@ -15,13 +16,13 @@ trait ServiceIntegrationFinder
      */
     protected function getServiceIntegrationQueryFinder($serviceIntegrationId = null, $resolverMethods = [])
     {
-        $serviceIntegrationModel     = config(ServiceProvider::PACKAGE_NAME.'.model');
+        $serviceIntegrationModel     = ServiceIntegrationsContainerProvider::getFromConfig('model', ServiceIntegration::class);
         $serviceIntegrationTableName = $serviceIntegrationModel::TABLE_NAME;
         $query                       = DB::table($serviceIntegrationTableName)
 
         if (!is_null($serviceIntegrationId)) {
             $query = $query->where('id', $serviceIntegrationId);
-        }elseif (isset($this->id) && self::class == config(ServiceProvider::PACKAGE_NAME.'.model')) {
+        }elseif (isset($this->id) && self::class == $serviceIntegrationModel) {
             $query = $query->where('id', $this->id);
         }else if (isset($this->service_integration_id)){
             $query = $query->where('id', $this->service_integration_id);
