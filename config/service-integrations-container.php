@@ -48,7 +48,7 @@ return [
         'system_charges' => [ 
             'selectable_button' => [
                 'text'             => 'System_Charges',
-                'background-color' => '#fff'
+                'background-color' => '#fff',
                 'icon'             => null,
             ],
             'model' => [
