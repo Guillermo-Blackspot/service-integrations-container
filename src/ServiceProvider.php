@@ -2,9 +2,9 @@
 
 namespace BlackSpot\ServiceIntegrationsContainer;
 
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\ServiceProvider as LaravelProvider;
 
-class ServiceIntegrationsContainerProvider extends ServiceProvider
+class ServiceProvider extends LaravelProvider
 {
     public const PACKAGE_NAME = 'service-integrations-container';
 

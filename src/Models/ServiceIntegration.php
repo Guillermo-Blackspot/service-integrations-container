@@ -2,7 +2,7 @@
 
 namespace BlackSpot\ServiceIntegrationsContainer\Models;
 
-use BlackSpot\ServiceIntegrationsContainer\ServiceIntegrationsContainerProvider;
+use BlackSpot\ServiceIntegrationsContainer\ServiceProvider;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
@@ -66,7 +66,7 @@ class ServiceIntegration extends Model
     {
         $shortened = [];
 
-        $payloadAttribute = ServiceIntegrationsContainerProvider::getFromConfig('payload_column', 'payload');
+        $payloadAttribute = ServiceProvider::getFromConfig('payload_column', 'payload');
 
         foreach ($this->{$payloadAttribute} as $property => $value) {
             $shortened[$property] = Str::limit($value, 15);

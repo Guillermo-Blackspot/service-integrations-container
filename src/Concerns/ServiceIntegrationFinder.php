@@ -3,7 +3,7 @@
 namespace BlackSpot\ServiceIntegrationsContainer\Concerns;
 
 use BlackSpot\ServiceIntegrationsContainer\Models\ServiceIntegration;
-use BlackSpot\ServiceIntegrationsContainer\ServiceIntegrationsContainerProvider;
+use BlackSpot\ServiceIntegrationsContainer\ServiceProvider;
 
 trait ServiceIntegrationFinder
 {   
@@ -16,7 +16,7 @@ trait ServiceIntegrationFinder
      */
     protected function getServiceIntegrationQueryFinder($serviceIntegrationId = null, $resolverMethods = [])
     {
-        $serviceIntegrationModel     = ServiceIntegrationsContainerProvider::getFromConfig('model', ServiceIntegration::class);
+        $serviceIntegrationModel     = ServiceProvider::getFromConfig('model', ServiceIntegration::class);
         $serviceIntegrationTableName = $serviceIntegrationModel::TABLE_NAME;
         $query                       = DB::table($serviceIntegrationTableName)
 

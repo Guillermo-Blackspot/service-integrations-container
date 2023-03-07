@@ -3,7 +3,7 @@
 namespace BlackSpot\ServiceIntegrationsContainer\Relationships;
 
 use BlackSpot\ServiceIntegrationsContainer\Models\ServiceIntegration;
-use BlackSpot\ServiceIntegrationsContainer\ServiceIntegrationsContainerProvider;
+use BlackSpot\ServiceIntegrationsContainer\ServiceProvider;
 
 trait HasServiceIntegrations
 {
@@ -27,6 +27,6 @@ trait HasServiceIntegrations
   */
   public function service_integrations()
   {
-    return $this->morphMany(ServiceIntegrationsContainerProvider::getFromConfig('model', ServiceIntegration::class), 'owner');
+    return $this->morphMany(ServiceProvider::getFromConfig('model', ServiceIntegration::class), 'owner');
   }
 }

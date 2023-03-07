@@ -17,7 +17,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "BlackSpot\\ServiceIntegrationsContainer\\ServiceIntegrationsContainerProvider"
+                "BlackSpot\\ServiceIntegrationsContainer\\ServiceProvider"
             ]
         }
     },
