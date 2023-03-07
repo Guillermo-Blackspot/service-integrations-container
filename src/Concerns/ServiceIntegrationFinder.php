@@ -4,6 +4,7 @@ namespace BlackSpot\ServiceIntegrationsContainer\Concerns;
 
 use BlackSpot\ServiceIntegrationsContainer\Models\ServiceIntegration;
 use BlackSpot\ServiceIntegrationsContainer\ServiceProvider;
+use Illuminate\Support\Facades\DB;
 
 trait ServiceIntegrationFinder
 {   
@@ -18,7 +19,7 @@ trait ServiceIntegrationFinder
     {
         $serviceIntegrationModel     = ServiceProvider::getFromConfig('model', ServiceIntegration::class);
         $serviceIntegrationTableName = $serviceIntegrationModel::TABLE_NAME;
-        $query                       = DB::table($serviceIntegrationTableName)
+        $query                       = DB::table($serviceIntegrationTableName);
 
         if (!is_null($serviceIntegrationId)) {
             $query = $query->where('id', $serviceIntegrationId);
@@ -40,7 +41,7 @@ trait ServiceIntegrationFinder
             }
         }else if(is_string($resolverMethods) && $resolverMethods){
             if (method_exists($this, $resolverMethods)) {
-                $query = $query->where('id', $this->{$resolverMethods}())
+                $query = $query->where('id', $this->{$resolverMethods}());
             }else{
                 $query = $query->where('id', 'not-exists-expecting-null');
             }
