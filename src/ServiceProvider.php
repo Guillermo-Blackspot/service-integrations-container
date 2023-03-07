@@ -41,7 +41,7 @@ class ServiceProvider extends ServiceProvider
     protected function registerPublishables()
     {
         $this->publishes([
-            __DIR__.'/../config/self::PACKAGE_NAME.php' => base_path('config/'.(self::PACKAGE_NAME).'.php'),
+            __DIR__.'/../config/'.self::PACKAGE_NAME.'.php' => base_path('config/'.(self::PACKAGE_NAME).'.php'),
         ], [self::PACKAGE_NAME, self::PACKAGE_NAME.':config']);
 
         $this->publishes([
