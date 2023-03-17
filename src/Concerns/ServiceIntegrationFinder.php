@@ -23,10 +23,6 @@ trait ServiceIntegrationFinder
 
         if (!is_null($serviceIntegrationId)) {
             $query = $query->where('id', $serviceIntegrationId);
-        }elseif (isset($this->id) && self::class == $serviceIntegrationModel) {
-            $query = $query->where('id', $this->id);
-        }else if (isset($this->service_integration_id)){
-            $query = $query->where('id', $this->service_integration_id);
         }else if (method_exists($this, 'getMainServiceIntegrationId')){
             $query = $query->where('id', $this->getMainServiceIntegrationId());
         }else if (method_exists($this, 'getMainServiceIntegrationOwnerId') && method_exists($this,'getMainServiceIntegrationOwnerType')){
@@ -45,6 +41,10 @@ trait ServiceIntegrationFinder
             }else{
                 $query = $query->where('id', 'not-exists-expecting-null');
             }
+        }elseif (isset($this->id) && self::class == $serviceIntegrationModel) {
+            $query = $query->where('id', $this->id);
+        }else if (isset($this->service_integration_id)){
+            $query = $query->where('id', $this->service_integration_id);
         }else{
             $query = $query->where('id', 'not-exists-expecting-null');
         }
