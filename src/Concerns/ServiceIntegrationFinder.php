@@ -135,7 +135,7 @@ trait ServiceIntegrationFinder
         // Ignoring next resolvers
         if ($serviceIntegrationId) {
             $this->resolverMethodFound = true;
-            $query->where('id', $serviceIntegrationId)
+            $query->where('id', $serviceIntegrationId);
         }
 
         return $this;
