@@ -37,12 +37,14 @@ trait ServiceIntegrationFinder
             return $belongsTo;
         }
 
+        $modelToInstance = '\\'.$serviceIntegrationClass;
+
         /*
          * Try to resolve the service integration to find
          * 
          * by id or by the resolver methods
          */
-        $query = ServiceIntegration::query();
+        $query = (new $modelToInstance)->query();
 
         $this->whereIdCondition($query, $serviceIntegrationId, $provider)
             ->whereCustomColumCondition($query, $provider);
