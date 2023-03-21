@@ -85,6 +85,10 @@ trait ServiceIntegrationFinder
      */
     public function serviceIntegrationWasLoaded($serviceIntegrationId)
     {
+        if (! $serviceIntegrationId) {
+            return false;
+        }
+
         return isset($this->serviceIntegrationsFound[$serviceIntegrationId]);
     }
 
@@ -95,7 +99,7 @@ trait ServiceIntegrationFinder
      * @return \BlackSpot\ServiceIntegrationsContainer\Models\ServiceIntegration
      */
     public function getServiceIntegrationLoaded($serviceIntegrationId)
-    {
+    {            
         return $this->serviceIntegrationsFound[$serviceIntegrationId];
     }
 
@@ -178,6 +182,8 @@ trait ServiceIntegrationFinder
      * Check if service_integration relationship exists
      *
      * @return \Illuminate\Database\Eloquent\Query\Builder
+     * 
+     * @throws \LogicException
      */
     private function queryFromBelongsToRelationship()
     {                
