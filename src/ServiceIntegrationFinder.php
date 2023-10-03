@@ -102,7 +102,11 @@ trait ServiceIntegrationFinder
             if (empty($conditions)) $query->where('id', 'model-not-exists--');
         }
 
-        return $callback($query);
+        if ($callback instanceof \Closure) {
+            return $callback($query);              
+        }
+
+        return $query;
     }
 
     /**
