@@ -1,8 +1,8 @@
 <?php
 
-namespace BlackSpot\ServiceIntegrationsContainer\Relationships;
+namespace BlackSpot\ServiceIntegrationsContainer;
 
-use BlackSpot\ServiceIntegrationsContainer\Models\ServiceIntegration;
+use BlackSpot\ServiceIntegrationsContainer\ServiceIntegration;
 use BlackSpot\ServiceIntegrationsContainer\ServiceProvider;
 
 trait HasServiceIntegrations

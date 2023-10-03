@@ -1,6 +1,6 @@
 <?php
 
-namespace BlackSpot\ServiceIntegrationsContainer\Models;
+namespace BlackSpot\ServiceIntegrationsContainer;
 
 use BlackSpot\ServiceIntegrationsContainer\ServiceProvider;
 use Illuminate\Database\Eloquent\Model;
@@ -8,7 +8,6 @@ use Illuminate\Support\Str;
 
 class ServiceIntegration extends Model
 {
-    
     /** 
      * The table associated with the model.
      *
@@ -23,7 +22,6 @@ class ServiceIntegration extends Model
      * @var array
      */
     protected $guarded = [];
-
 
     /**
      * Indicates if the model should be timestamped.
@@ -43,7 +41,6 @@ class ServiceIntegration extends Model
 
     public const STRIPE_SERVICE = 'Stripe'; 
     public const STRIPE_SERVICE_SHORT_NAME = 'str'; 
-
     public const SYSTEM_CHARGES_SERVICE = 'System_Charges'; 
     public const SYSTEM_CHARGES_SERVICE_SHORT_NAME = 'sys_ch';     
 
@@ -74,19 +71,16 @@ class ServiceIntegration extends Model
 
         return $shortened;
     }
-     
-    /**
-     * Get the owner of the service integration
-     */
-    public function owner()
+
+    public function active()
     {
-        return $this->morphTo('owner');
+        return $this->active;
     }
 
-    /**
-     * Scopes
-     */
-
+    public function disabled()
+    {
+        return ! $this->active;
+    }
 
     /**
      * Determine that the integrated service must be active
@@ -97,5 +91,26 @@ class ServiceIntegration extends Model
     public function scopeActive($query)
     {
         return $query->where('active', true);
+    }
+
+    /**
+     * Determine that the integrated service must be disabled
+     *
+     * @param \Illuminate\Database\Query\Builder $query
+     * @return void
+     */
+    public function scopeDisabled($query)
+    {
+        return $query->where('active', false);
+    }    
+
+    /**
+     * Get the owner of the service integration
+     * 
+     * @return object
+     */
+    public function owner()
+    {
+        return $this->morphTo('owner');
     }
 }
