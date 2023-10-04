@@ -24,9 +24,9 @@ trait ServiceIntegrationFinder
     {
         $query = $this->getServiceIntegrationBaseQuery();
 
-        if (! is_null($query)) throw new Exception('Service integration query can not be builded.');
+        if (is_null($query)) throw new \Exception('Service integration query can not be builded.');
         
-        $this->addConditions($serviceIntegrationId, $provider, $callback);
+        $this->addConditions($query, $serviceIntegrationId, $provider, $callback);
 
         return $query;
     }
@@ -92,7 +92,7 @@ trait ServiceIntegrationFinder
         return $this->serviceIntegrationsFound[$serviceIntegration->id] = $serviceIntegration;
     }
 
-    public function addConditions($serviceIntegrationId, $provider = null, $callback = null)
+    public function addConditions($query, $serviceIntegrationId, $provider = null, $callback = null)
     {
         if (($serviceIntegrationId = $this->resolveServiceIntegrationId($serviceIntegrationId, $provider)) != null) {
             $query->where('id', $serviceIntegrationId);
