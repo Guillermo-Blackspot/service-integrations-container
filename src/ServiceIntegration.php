@@ -72,16 +72,6 @@ class ServiceIntegration extends Model
         return $shortened;
     }
 
-    public function active()
-    {
-        return $this->active;
-    }
-
-    public function disabled()
-    {
-        return ! $this->active;
-    }
-
     /**
      * Determine that the integrated service must be active
      *
